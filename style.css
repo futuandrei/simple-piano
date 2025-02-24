@@ -2,12 +2,19 @@ html, body {
     touch-action: manipulation;
 }
 
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #222;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; /* Safari & older Chrome */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* Internet Explorer/Edge */
+    user-select: none;         /* Standard */
+    -webkit-tap-highlight-color: transparent;
 }
 
 .piano {
@@ -32,6 +39,7 @@ body {
     background: white;
 }
 
+
 .black {
     background: black;
     height: 120px;
@@ -43,6 +51,12 @@ body {
     color: white;
 }
 
-.key:active {
+/* .key:active {
     background: lightgray;
+} */
+
+/* Ensure active state registers on touch */
+.key:active, 
+.key:focus {
+    background-color: lightgray; /* Change to your desired active color */
 }

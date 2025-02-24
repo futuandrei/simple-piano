@@ -1,20 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
     const keys = document.querySelectorAll(".key");
 
+    // Preload sounds into a dictionary
+    const sounds = {};
     keys.forEach(key => {
-        key.addEventListener("click", () => playSound(key));
+        const soundSrc = key.getAttribute("data-sound");
+        sounds[key.dataset.key] = new Audio(soundSrc);
+    });
+
+    keys.forEach(key => {
+        key.addEventListener("click", () => playSound(key.dataset.key));
     });
 
     document.addEventListener("keydown", (e) => {
-        const key = document.querySelector(`.key[data-key="${e.key.toUpperCase()}"]`);
-        if (key) playSound(key);
+        if (sounds[e.key.toUpperCase()]) {
+            playSound(e.key.toUpperCase());
+        }
     });
 
     function playSound(key) {
-        const sound = new Audio(key.getAttribute("data-sound"));
-        sound.currentTime = 0; // Restart sound on repeated press
-        sound.play();
-        key.classList.add("active");
-        setTimeout(() => key.classList.remove("active"), 200);
+        const sound = sounds[key];
+        if (sound) {
+            sound.currentTime = 0; // Restart the sound instantly
+            sound.play();
+        }
     }
 });

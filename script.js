@@ -1,3 +1,6 @@
+// Improve touch performance
+document.addEventListener("touchstart", () => { }, { passive: true });
+
 document.addEventListener("DOMContentLoaded", () => {
     const keys = document.querySelectorAll(".key");
 
